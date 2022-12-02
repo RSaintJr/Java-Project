@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Pedido {
 	
-	private int codigo;
+    private int codigo;
     private String nome;
     private String descricao;
     private Date data;
