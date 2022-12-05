@@ -1,13 +1,23 @@
 package com.classes.DTO;
 
-public class Estoque {
+public class Estoque extends Local{
 		
-		private int codigo;
-		private int produto;
+            private int produto;
 	    private int ferramentas;
 	    private int componentes;
+	    
+	    public Estoque() {
+	    	
+	    }
+	    
+	    public Estoque(String setor,int produto, int ferramentas, int componentes) {
+	    	super(setor);
+			this.produto = produto;
+			this.ferramentas = ferramentas;
+			this.componentes = componentes;
+		}
 
-	    public int getProduto() {
+		public int getProduto() {
 	        return produto;
 	    }
 
@@ -31,18 +41,10 @@ public class Estoque {
 	        this.componentes = componentes;
 	    }
 	    
-	    public int getCodigo() {
-			return codigo;
-		}
-
-		public void setCodigo(int codigo) {
-			this.codigo = codigo;
-		}
-
+	    
 	    @Override
 	    public String toString() {
 	        final StringBuilder sb = new StringBuilder("Estoque{");
-	        sb.append("codigo=").append(codigo);
 	        sb.append(", produto=").append(produto);
 	        sb.append(", ferramentas=").append(ferramentas);
 	        sb.append(", componentes=").append(componentes);

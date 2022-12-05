@@ -27,7 +27,7 @@ public class PedidoBO {
     }
     public Pedido procurarPorNome(Pedido pedido){
         PedidoDAO pedidoDAO = new PedidoDAO();
-        return pedidoDAO.procurarPorNome(pedido);
+        return pedidoDAO.procurarPorCodProduto(pedido);
     }
     public boolean existe(Pedido pedido){
         PedidoDAO pedidoDAO = new PedidoDAO();

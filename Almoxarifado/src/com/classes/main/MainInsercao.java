@@ -10,17 +10,17 @@ public class MainInsercao {
 		Date data = new Date(System.currentTimeMillis());
 		// Teste Inserir
 		PedidoBO pedidoBO = new PedidoBO();
-		Pedido pedido = new Pedido("Fran Bow", "4 vassouras", data ,false,true);
+		Pedido pedido = new Pedido(4, "4 vassouras", data);
 		if (pedidoBO.inserir(pedido))
 			System.out.println("Inserido com Sucesso");
 		else
 			System.out.println("Erro ao Inserir");
-		pedido = new Pedido("Selen", "7 fogões", data ,false,true);
+		pedido = new Pedido(7, "7 fogões", data);
 		if (pedidoBO.inserir(pedido))
 			System.out.println("Inserido com Sucesso");
 		else
 			System.out.println("Erro ao Inserir");
-		pedido = new Pedido("Apollo Creed", "15 pinos de máquina agricola", data ,true,false);
+		pedido = new Pedido(2, "15 pinos de máquina agricola", data);
 		if (pedidoBO.inserir(pedido))
 			System.out.println("Inserido com Sucesso");
 		else

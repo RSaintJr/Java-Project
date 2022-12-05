@@ -4,13 +4,11 @@ import java.util.Date;
 
 public class Pedido {
 	
-    private int codigo;
-    private String nome;
+	private int codigo;
+    private int codProduto;
     private String descricao;
     private Date data;
-    private boolean saida;
-    private boolean entrada;
-
+    
     public Pedido() {
         
     }
@@ -19,21 +17,19 @@ public class Pedido {
     	setCodigo(codigo);
     }
     
-    public Pedido(String nome) {
-    	setNome(nome);
+    public Pedido(String descricao) {
+    	setDescricao(descricao);
     }
     
-    public Pedido(int codigo,String nome) {
+    public Pedido(int codigo,String descricao) {
     	setCodigo(codigo);
-    	setNome(nome);
+    	setDescricao(descricao);
     }
     
-    public Pedido(String nome, String descricao, Date data, boolean saida, boolean entrada) {
-		this.nome = nome;
+    public Pedido(int codProduto, String descricao, Date data) {
+		this.codProduto = codProduto;
 		this.descricao = descricao;
 		this.data = data;
-		this.saida = saida;
-		this.entrada = entrada;
 	}
 
     public Date getData() {
@@ -52,30 +48,13 @@ public class Pedido {
         this.descricao = descricao;
     }
 
-    public boolean isSaida() {
-        return saida;
-    }
+	public int getCodProduto() {
+		return codProduto;
+	}
 
-    public void setSaida(boolean saida) {
-        this.saida = saida;
-    }
-
-    public boolean isEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(boolean entrada) {
-        this.entrada = entrada;
-    }
-
-  
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setCodProduto(int codProduto) {
+		this.codProduto = codProduto;
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -90,19 +69,14 @@ public class Pedido {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Pedido [codigo=");
 		builder.append(codigo);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append(", pedido=");
+		builder.append(", codProduto=");
+		builder.append(codProduto);
+		builder.append(", descricao=");
 		builder.append(descricao);
 		builder.append(", data=");
 		builder.append(data);
-		builder.append(", saida=");
-		builder.append(saida);
-		builder.append(", entrada=");
-		builder.append(entrada);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }

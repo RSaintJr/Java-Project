@@ -15,13 +15,12 @@ public class PedidoDAO {
     public boolean inserir(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "INSERT INTO " + NOMEDATABELA + " (nome,descricao,data,saida,entrada)  VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO " + NOMEDATABELA + " (codProduto,descricao,data)  VALUES (?,?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, pedido.getNome());
+            ps.setInt(1, pedido.getCodProduto());
             ps.setString(2, pedido.getDescricao());
             ps.setDate(3, (Date) pedido.getData());
-            ps.setBoolean(4, pedido.isSaida());
-            ps.setBoolean(5, pedido.isEntrada());
+   
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -34,9 +33,9 @@ public class PedidoDAO {
     public boolean alterar(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "UPDATE " + NOMEDATABELA + " SET nome = ? WHERE codigo = ?;";
+            String sql = "UPDATE " + NOMEDATABELA + " SET codProduto = ? WHERE codigo = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, pedido.getNome());
+            ps.setInt(1, pedido.getCodProduto());
             ps.setInt(2, pedido.getCodigo());
             ps.executeUpdate();
             ps.close();
@@ -72,11 +71,10 @@ public class PedidoDAO {
             if (rs.next()) {
                 Pedido obj = new Pedido();
                 obj.setCodigo(rs.getInt(1));
-                obj.setNome(rs.getString(2));
+                obj.setCodProduto(rs.getInt(2));
                 obj.setDescricao(rs.getString(3));
                 obj.setData(rs.getDate(4));
-                obj.setSaida(rs.getBoolean(5));
-                obj.setEntrada(rs.getBoolean(6));
+             
                 ps.close();
                 rs.close();
                 conn.close();
@@ -92,21 +90,20 @@ public class PedidoDAO {
              return null;
         }
     }
-    public Pedido procurarPorNome(Pedido pedido) {
+    public Pedido procurarPorCodProduto(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
             String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, pedido.getNome());
+            ps.setInt(1, pedido.getCodProduto());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Pedido obj = new Pedido();
                 obj.setCodigo(rs.getInt(1));
-                obj.setNome(rs.getString(2));
+                obj.setCodProduto(rs.getInt(2));
                 obj.setDescricao(rs.getString(3));
                 obj.setData(rs.getDate(4));
-                obj.setSaida(rs.getBoolean(5));
-                obj.setEntrada(rs.getBoolean(6));
+                
                 ps.close();
                 rs.close();
                 conn.close();
@@ -126,7 +123,7 @@ public class PedidoDAO {
             Connection conn = Conexao.conectar();
             String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, pedido.getNome());
+            ps.setInt(1, pedido.getCodProduto());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ps.close();
@@ -161,11 +158,10 @@ public class PedidoDAO {
             while (rs.next()) {
                 Pedido obj = new Pedido();
                 obj.setCodigo(rs.getInt(1));
-                obj.setNome(rs.getString(2));
+                obj.setCodProduto(rs.getInt(2));
                 obj.setDescricao(rs.getString(3));
                 obj.setData(rs.getDate(4));
-                obj.setSaida(rs.getBoolean(5));
-                obj.setEntrada(rs.getBoolean(6));
+                
                 listObj.add(obj);
             }
             return listObj;
