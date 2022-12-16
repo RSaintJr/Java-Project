@@ -31,10 +31,12 @@ public class PessoaDAO {
     public boolean alterar(Pessoa pessoa) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "UPDATE " + NOMEDATABELA + " SET nome = ? WHERE codigo = ?;";
+            String sql = "UPDATE " + NOMEDATABELA + " SET nome = ?,cpf = ?,telefone = ? WHERE codigo = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pessoa.getNome());
-            ps.setInt(2, pessoa.getCodigo());
+            ps.setString(2, pessoa.getCpf());
+            ps.setInt(3, pessoa.getTelefone());
+            ps.setInt(4, pessoa.getCodigo());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -117,9 +119,9 @@ public class PessoaDAO {
     public boolean existe(Pessoa pessoa) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE codigo = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, pessoa.getNome());
+            ps.setInt(1, pessoa.getCodigo());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ps.close();

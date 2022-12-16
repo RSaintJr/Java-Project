@@ -11,8 +11,15 @@ public class Pessoa {
 		
 	}
 	
-	public Pessoa(String nome) {
+	public Pessoa(int codigo) {
+		setCodigo(codigo);
+	}
+	
+	public Pessoa(int codigo,String nome,String cpf, int telefone) {
+		setCodigo(codigo);
+		setCpf(cpf);
 		setNome(nome);
+		setTelefone(telefone);
 	}
 	
 	public Pessoa(String nome,String cpf, int telefone) {

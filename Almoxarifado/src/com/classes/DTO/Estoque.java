@@ -2,7 +2,8 @@ package com.classes.DTO;
 
 public class Estoque extends Local{
 		
-            private int produto;
+		private int codSetor;
+        private int produto;
 	    private int ferramentas;
 	    private int componentes;
 	    
@@ -10,12 +11,20 @@ public class Estoque extends Local{
 	    	
 	    }
 	    
-	    public Estoque(String setor,int produto, int ferramentas, int componentes) {
+	    public Estoque(String setor) {
 	    	super(setor);
-			this.produto = produto;
-			this.ferramentas = ferramentas;
-			this.componentes = componentes;
 		}
+	    
+	    public Estoque(int codSetor) {
+	    	this.codSetor = codSetor;
+	    }
+	    
+	    public Estoque(int codSetor,int produto,int ferramentas,int componentes) {
+	    	this.codSetor = codSetor;
+	    	this.produto = produto;
+	    	this.ferramentas = ferramentas;
+	    	this.componentes = componentes;
+	    }
 
 		public int getProduto() {
 	        return produto;
@@ -42,14 +51,27 @@ public class Estoque extends Local{
 	    }
 	    
 	    
-	    @Override
-	    public String toString() {
-	        final StringBuilder sb = new StringBuilder("Estoque{");
-	        sb.append(", produto=").append(produto);
-	        sb.append(", ferramentas=").append(ferramentas);
-	        sb.append(", componentes=").append(componentes);
-	        sb.append('}');
-	        return sb.toString();
-	    }
+	    public int getCodSetor() {
+			return codSetor;
+		}
+
+		public void setCodSetor(int codSetor) {
+			this.codSetor = codSetor;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("Estoque [codSetor=");
+			builder.append(codSetor);
+			builder.append(", produto=");
+			builder.append(produto);
+			builder.append(", ferramentas=");
+			builder.append(ferramentas);
+			builder.append(", componentes=");
+			builder.append(componentes);
+			builder.append("]");
+			return builder.toString();
+		}
 
 }

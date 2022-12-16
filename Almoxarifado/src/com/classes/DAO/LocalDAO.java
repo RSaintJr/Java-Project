@@ -88,9 +88,9 @@ public class LocalDAO {
     public boolean existe(Local local) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE codigo = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, local.getSetor());
+            ps.setInt(1, local.getCodigo());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ps.close();

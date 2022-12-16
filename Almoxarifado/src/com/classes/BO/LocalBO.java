@@ -5,7 +5,7 @@ import java.util.List;
 import com.classes.DAO.LocalDAO;
 import com.classes.DTO.Local;
 
-class LocalBO {
+public class LocalBO {
 	
     public boolean inserir(Local local){
         if (existe(local) != true) {

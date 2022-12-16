@@ -5,8 +5,9 @@ import java.util.Date;
 public class Pedido {
 	
 	private int codigo;
+	private int pessoaCod;
     private int codProduto;
-    private String descricao;
+    private boolean entrada;
     private Date data;
     
     public Pedido() {
@@ -17,18 +18,16 @@ public class Pedido {
     	setCodigo(codigo);
     }
     
-    public Pedido(String descricao) {
-    	setDescricao(descricao);
-    }
-    
-    public Pedido(int codigo,String descricao) {
+    public Pedido(int codigo,int codProduto,boolean entrada) {
     	setCodigo(codigo);
-    	setDescricao(descricao);
+    	setCodProduto(codProduto);
+    	setEntrada(entrada);
     }
     
-    public Pedido(int codProduto, String descricao, Date data) {
+    public Pedido(int pessoaCod,int codProduto,boolean opcao,Date data) {
+    	this.pessoaCod = pessoaCod;
 		this.codProduto = codProduto;
-		this.descricao = descricao;
+		this.entrada = opcao;
 		this.data = data;
 	}
 
@@ -37,15 +36,7 @@ public class Pedido {
     }
 
     public void setData(java.sql.Date date) {
-        this.data = new Date();
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.data = date;
     }
 
 	public int getCodProduto() {
@@ -63,20 +54,38 @@ public class Pedido {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	
+	public int getPessoaCod() {
+		return pessoaCod;
+	}
+
+	public void setPessoaCod(int pessoaCod) {
+		this.pessoaCod = pessoaCod;
+	}
+	
+	public boolean isEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(boolean entrada) {
+		this.entrada = entrada;
+	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Pedido [codigo=");
 		builder.append(codigo);
+		builder.append(", pessoaCod=");
+		builder.append(pessoaCod);
 		builder.append(", codProduto=");
 		builder.append(codProduto);
-		builder.append(", descricao=");
-		builder.append(descricao);
+		builder.append(", entrada=");
+		builder.append(entrada);
 		builder.append(", data=");
 		builder.append(data);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

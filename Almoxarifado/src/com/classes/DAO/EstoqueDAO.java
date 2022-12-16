@@ -14,11 +14,12 @@ public class EstoqueDAO {
     public boolean inserir(Estoque estoque) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "INSERT INTO " + NOMEDATABELA + " (produto,ferramentas,componentes)  VALUES (?,?,?);";
+            String sql = "INSERT INTO " + NOMEDATABELA + " (codigo_setor,produto,ferramenta,componente)  VALUES (?,?,?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, estoque.getProduto());
-            ps.setInt(2, estoque.getFerramentas());
-            ps.setInt(3, estoque.getComponentes());
+            ps.setInt(1, estoque.getCodSetor());
+            ps.setInt(2, estoque.getProduto());
+            ps.setInt(3, estoque.getFerramentas());
+            ps.setInt(4, estoque.getComponentes());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -31,10 +32,12 @@ public class EstoqueDAO {
     public boolean alterar(Estoque estoque) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "UPDATE " + NOMEDATABELA + " SET produto,ferramentas,componentes = ?,?,? WHERE setor = ?;";
+            String sql = "UPDATE " + NOMEDATABELA + " SET produto = ?,ferramenta = ?,componente = ? WHERE codigo_setor = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, estoque.getProduto());
-            ps.setString(2, estoque.getSetor());
+            ps.setInt(2, estoque.getFerramentas());
+            ps.setInt(3, estoque.getComponentes());
+            ps.setInt(4, estoque.getCodSetor());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -59,18 +62,19 @@ public class EstoqueDAO {
              return false;
         }
     }
-    public Estoque procurarPorSetor(Estoque estoque) {
+    public Estoque procurarPorCodigoSetor(Estoque estoque) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE setor = ?;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE codigo_setor = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, estoque.getSetor());
+            ps.setInt(1, estoque.getCodSetor());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
             	Estoque obj = new Estoque();
-                obj.setProduto(rs.getInt(1));
-                obj.setFerramentas(rs.getInt(2));
-                obj.setComponentes(rs.getInt(3));
+            	obj.setCodSetor(rs.getInt(1));
+                obj.setProduto(rs.getInt(2));
+                obj.setFerramentas(rs.getInt(3));
+                obj.setComponentes(rs.getInt(4));
                 ps.close();
                 rs.close();
                 conn.close();
@@ -90,9 +94,9 @@ public class EstoqueDAO {
     public boolean existe(Estoque estoque) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE setor = ?;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE codigo_setor = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, estoque.getSetor());
+            ps.setInt(1, estoque.getCodSetor());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ps.close();

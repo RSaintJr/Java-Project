@@ -9,7 +9,7 @@ public class MainProcurarPorCodigo {
 			
 		// Teste Procurar por Codigo
 		PedidoBO pedidoBO = new PedidoBO();
-		Pedido pedido = new Pedido(3,"");
+		Pedido pedido = new Pedido(3);
 		pedido = pedidoBO.procurarPorCodigo(pedido);
 		System.out.println(pedido);
 		

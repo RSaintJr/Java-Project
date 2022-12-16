@@ -21,9 +21,9 @@ public class EstoqueBO {
         EstoqueDAO estoqueDAO = new EstoqueDAO();
         return estoqueDAO.excluir(estoque);
     }
-    public Estoque procurarPorSetor(Estoque estoque){
+    public Estoque procurarPorCodigoSetor(Estoque estoque){
         EstoqueDAO estoqueDAO = new EstoqueDAO();
-        return estoqueDAO.procurarPorSetor(estoque);
+        return estoqueDAO.procurarPorCodigoSetor(estoque);
     }
     public boolean existe(Estoque estoque){
         EstoqueDAO estoqueDAO = new EstoqueDAO();

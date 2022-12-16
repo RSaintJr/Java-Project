@@ -6,6 +6,15 @@ public class Local {
 		private int codigo;
 		private	String setor;
 	 	
+		public Local(int codigo,String setor) {
+			this.codigo = codigo;
+			this.setor = setor;
+		}
+		
+		public Local(int codigo) {
+			this.codigo = codigo;
+		}
+		
 		public Local(String setor) {
 			this.setor = setor;
 		}

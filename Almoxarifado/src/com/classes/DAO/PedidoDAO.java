@@ -15,12 +15,12 @@ public class PedidoDAO {
     public boolean inserir(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "INSERT INTO " + NOMEDATABELA + " (codProduto,descricao,data)  VALUES (?,?,?);";
+            String sql = "INSERT INTO " + NOMEDATABELA + " (pessoa_codigo,codProduto,entrada,data)  VALUES (?,?,?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, pedido.getCodProduto());
-            ps.setString(2, pedido.getDescricao());
-            ps.setDate(3, (Date) pedido.getData());
-   
+            ps.setInt(1, pedido.getPessoaCod());
+            ps.setInt(2, pedido.getCodProduto());
+            ps.setBoolean(3, pedido.isEntrada());
+            ps.setDate(4, (Date) pedido.getData());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -33,10 +33,11 @@ public class PedidoDAO {
     public boolean alterar(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "UPDATE " + NOMEDATABELA + " SET codProduto = ? WHERE codigo = ?;";
+            String sql = "UPDATE " + NOMEDATABELA + " SET codProduto = ?,entrada = ? WHERE codigo = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, pedido.getCodProduto());
-            ps.setInt(2, pedido.getCodigo());
+            ps.setBoolean(2, pedido.isEntrada());
+            ps.setInt(3, pedido.getCodigo());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -71,10 +72,10 @@ public class PedidoDAO {
             if (rs.next()) {
                 Pedido obj = new Pedido();
                 obj.setCodigo(rs.getInt(1));
-                obj.setCodProduto(rs.getInt(2));
-                obj.setDescricao(rs.getString(3));
-                obj.setData(rs.getDate(4));
-             
+                obj.setPessoaCod(rs.getInt(2));
+                obj.setCodProduto(rs.getInt(3));
+                obj.setEntrada(rs.getBoolean(4));
+                obj.setData(rs.getDate(5));
                 ps.close();
                 rs.close();
                 conn.close();
@@ -93,17 +94,17 @@ public class PedidoDAO {
     public Pedido procurarPorCodProduto(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE codProduto = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, pedido.getCodProduto());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Pedido obj = new Pedido();
                 obj.setCodigo(rs.getInt(1));
-                obj.setCodProduto(rs.getInt(2));
-                obj.setDescricao(rs.getString(3));
-                obj.setData(rs.getDate(4));
-                
+                obj.setPessoaCod(rs.getInt(2));
+                obj.setCodProduto(rs.getInt(3));
+                obj.setEntrada(rs.getBoolean(4));
+                obj.setData(rs.getDate(5));
                 ps.close();
                 rs.close();
                 conn.close();
@@ -121,9 +122,9 @@ public class PedidoDAO {
     public boolean existe(Pedido pedido) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE nome = ?;";
+            String sql = "SELECT * FROM " + NOMEDATABELA + " WHERE codigo = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, pedido.getCodProduto());
+            ps.setInt(1, pedido.getCodigo());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ps.close();
@@ -147,9 +148,9 @@ public class PedidoDAO {
             List<Pedido> listObj = montarLista(rs);
             return listObj;
         } catch (Exception e) {
-            //System.err.println("Erro: " + e.toString());
-            //e.printStackTrace();
-            return null;
+//            System.err.println("Erro: " + e.toString());
+//            e.printStackTrace();
+        	  return null;
         }
     }
     public List<Pedido> montarLista(ResultSet rs) {
@@ -158,10 +159,10 @@ public class PedidoDAO {
             while (rs.next()) {
                 Pedido obj = new Pedido();
                 obj.setCodigo(rs.getInt(1));
-                obj.setCodProduto(rs.getInt(2));
-                obj.setDescricao(rs.getString(3));
-                obj.setData(rs.getDate(4));
-                
+                obj.setPessoaCod(rs.getInt(2));
+                obj.setCodProduto(rs.getInt(3));
+                obj.setEntrada(rs.getBoolean(4));
+                obj.setData(rs.getDate(5));
                 listObj.add(obj);
             }
             return listObj;
