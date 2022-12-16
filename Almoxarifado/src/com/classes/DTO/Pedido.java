@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Pedido {
 	
-	private int codigo;
-	private int pessoaCod;
+    private int codigo;
+    private int pessoaCod;
     private int codProduto;
     private boolean entrada;
     private Date data;
