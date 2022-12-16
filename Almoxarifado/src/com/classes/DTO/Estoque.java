@@ -2,10 +2,10 @@ package com.classes.DTO;
 
 public class Estoque extends Local{
 		
-		private int codSetor;
+	private int codSetor;
         private int produto;
-	    private int ferramentas;
-	    private int componentes;
+	private int ferramentas;
+	private int componentes;
 	    
 	    public Estoque() {
 	    	
