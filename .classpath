@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Almoxarifado/src"/>
+	<classpathentry kind="lib" path="out/production/Java-Project-main/lib/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="output" path="Almoxarifado/bin"/>
+</classpath>
